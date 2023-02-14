@@ -1,23 +1,15 @@
 var createError = require("http-errors");
 var express = require("express");
-var mongoose = require("mongoose");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const { format } = require("date-fns");
 
 // 1st party dependencies
-var configData = require("./config/connection");
 var indexRouter = require("./routes/index");
 
 async function getApp() {
-
-  // Database
-  var connectionInfo = await configData.getConnectionInfo();
-  mongoose.connect(connectionInfo.DATABASE_URL);
-
   var app = express();
-
   var port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
 
